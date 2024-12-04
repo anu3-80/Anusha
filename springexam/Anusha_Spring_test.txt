@@ -1,0 +1,149 @@
+1. Student.java
+
+package Spring_test;
+
+public class Student 
+{
+	String name;
+	String sectioon;
+	int marks;
+	String clg;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getSectioon() {
+		return sectioon;
+	}
+	public void setSectioon(String sectioon) {
+		this.sectioon = sectioon;
+	}
+	public int getMarks() {
+		return marks;
+	}
+	public void setMarks(int marks) {
+		this.marks = marks;
+	}
+	public String getClg() {
+		return clg;
+	}
+	public void setClg(String clg) {
+		this.clg = clg;
+	}
+	@Override
+	public String toString() {
+		return "Student [name=" + name + ", sectioon=" + sectioon + ", marks=" + marks + ", clg=" + clg + "]";
+	}
+}
+----------------------------------------------------------------------------------------------------------------------------
+2.Employee.java
+
+package Spring_test;
+
+public class Employee 
+{
+	int id;
+	String name;
+	String dept;
+	int salary;
+	public Employee(int id, String name, String dept, int salary) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.dept = dept;
+		this.salary = salary;
+	}
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", dept=" + dept + ", salary=" + salary + "]";
+	}
+	
+}
+------------------------------------------------------------------------------------------------------------------------------
+3. Game.java
+
+package Spring_test;
+
+public class Game 
+{
+	String name;
+	String player;
+	int stadium_name;
+	String stadium_strength;
+	public Game(String name, String player, int stadium_name, String stadium_strength) {
+		super();
+		this.name = name;
+		this.player = player;
+		this.stadium_name = stadium_name;
+		this.stadium_strength = stadium_strength;
+	}
+	@Override
+	public String toString() {
+		return "Game [name=" + name + ", player=" + player + ", stadium_name=" + stadium_name + ", stadium_strength="
+				+ stadium_strength + "]";
+	}
+	
+}
+
+----------------------------------------------------------------------------------------------------------------------------
+Config.java
+
+package Spring_test;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class Config 
+{
+	@Bean
+	public Student stu()
+	{
+		Student s=new Student();
+		s.setName("Anusha");
+		s.setSectioon("A");
+		s.setMarks(45);
+		s.setClg("Sviet");
+		return s;
+	}
+	@Bean
+	public Employee emp()
+	{
+		Employee e=new Employee(1,"Kishore","Technical Dept",25000);
+		return e;
+	}
+	@Bean
+	public Game g()
+	{
+		Game g=new Game("Virat","cricker",107,"Strong");
+		return g;
+	}
+	
+}
+
+---------------------------------------------------------------------------------------------------------
+Main.java
+
+package Spring_test;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class Main {
+
+	public static void main(String[] args) 
+	{
+		
+		ApplicationContext c=new AnnotationConfigApplicationContext(Config.class);
+		Student s=c.getBean(Student.class);
+		System.out.println(s);
+		Employee e=c.getBean(Employee.class);
+		System.out.println(e);
+		Game g=c.getBean(Game.class);
+		System.out.println(g);
+	}
+
+}
+
